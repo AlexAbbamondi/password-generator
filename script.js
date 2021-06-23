@@ -86,7 +86,52 @@ var upperCasedCharacters = [
   "Z",
 ];
 
-var passLength = prompt("Enter length of password")
+function generatePassword() {
+  var combinedPassword = [];
+  var passLength = prompt("Enter length of password");
+  // If statment to check length
+  if (passLength >= 8 && passLength <= 128) {
+    console.log(passLength);
+  } else {
+    alert("Password must be atleast 8 characters and no more than 128");
+    var passLength = prompt("Enter length of password");
+  }
+
+  //check if characters are included, true or false
+  var containsSpecialCharacters = confirm(
+    "Click ok to confirm special characters in your password"
+  );
+  if (containsSpecialCharacters === true) {
+    combinedPassword = specialCharacters.concat(combinedPassword);
+    console.log(combinedPassword);
+  }
+
+  var hasNumericCharacters = confirm(
+    "Click OK to confirm including numeric characters"
+  );
+  if (hasNumericCharacters === true) {
+    combinedPassword = numericCharacters.concat(combinedPassword);
+    console.log(combinedPassword);
+  }
+
+  var hasLowercasedCharacters = confirm(
+    "Click OK to confirm including lowercase characters"
+  );
+  if (hasLowercasedCharacters === true) {
+    combinedPassword = lowerCasedCharacters.concat(combinedPassword);
+    console.log(combinedPassword);
+  }
+
+  var hasUppercasedCharacters = confirm(
+    "Click OK to confirm including uppercase characters"
+  );
+  if (hasUppercasedCharacters === true) {
+    combinedPassword = upperCasedCharacters.concat(combinedPassword);
+    console.log(combinedPassword);
+  }
+
+  //create empty array to contain password
+}
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
@@ -101,7 +146,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-function generatePassword() {
-
-}
