@@ -1,3 +1,4 @@
+// Array of special characters to be included in password
 var specialCharacters = [
   "@",
   "%",
@@ -86,52 +87,65 @@ var upperCasedCharacters = [
   "Z",
 ];
 
+//Created empty array to store all characters for password selection
+var combinedCharacters = [];
+var finalPassword = [];
+
+//function to generate a password
 function generatePassword() {
-  var combinedPassword = [];
-  var passLength = prompt("Enter length of password");
+  //Prompt to get the length for the password, if not in range tell user and show prompt again
+  passLength = parseInt(prompt("Enter length of password"));
+
   // If statment to check length
-  if (passLength >= 8 && passLength <= 128) {
-    console.log(passLength);
-  } else {
+  if (passLength <= 8 && passLength >= 128) {
     alert("Password must be atleast 8 characters and no more than 128");
-    var passLength = prompt("Enter length of password");
+    passLength = prompt("Enter length of password");
   }
 
-  //check if characters are included, true or false
+  //Check if special charaters should be included in the new array and if so add them
   var containsSpecialCharacters = confirm(
     "Click ok to confirm special characters in your password"
   );
   if (containsSpecialCharacters === true) {
-    combinedPassword = specialCharacters.concat(combinedPassword);
-    console.log(combinedPassword);
+    combinedCharacters = specialCharacters.concat(combinedCharacters);
+    console.log(combinedCharacters);
   }
 
+  //Check if numeric charaters should be included in the new array and if so add them
   var hasNumericCharacters = confirm(
     "Click OK to confirm including numeric characters"
   );
   if (hasNumericCharacters === true) {
-    combinedPassword = numericCharacters.concat(combinedPassword);
-    console.log(combinedPassword);
+    combinedCharacters = numericCharacters.concat(combinedCharacters);
+    console.log(combinedCharacters);
   }
 
+  //Check if lowercase charaters should be included in the new array and if so add them
   var hasLowercasedCharacters = confirm(
     "Click OK to confirm including lowercase characters"
   );
   if (hasLowercasedCharacters === true) {
-    combinedPassword = lowerCasedCharacters.concat(combinedPassword);
-    console.log(combinedPassword);
+    combinedCharacters = lowerCasedCharacters.concat(combinedCharacters);
+    console.log(combinedCharacters);
   }
 
+  //Check if uppercase charaters should be included in the new array and if so add them
   var hasUppercasedCharacters = confirm(
     "Click OK to confirm including uppercase characters"
   );
   if (hasUppercasedCharacters === true) {
-    combinedPassword = upperCasedCharacters.concat(combinedPassword);
-    console.log(combinedPassword);
+    combinedCharacters = upperCasedCharacters.concat(combinedCharacters);
+    console.log(combinedCharacters);
   }
 
-  //create empty array to contain password
+  for (let i = 0; i < passLength; i++) {
+    var randomChar = combinedCharacters[Math.floor(Math.random() * combinedCharacters.length)];
+    finalPassword.push(randomChar);
+  }
+  return finalPassword.join("");
+  //try writepassword with finalpassword
 }
+
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
@@ -142,6 +156,7 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
+  
 }
 
 // Add event listener to generate button
