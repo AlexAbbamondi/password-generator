@@ -87,17 +87,16 @@ var upperCasedCharacters = [
   "Z",
 ];
 
-//Created empty array to store all characters for password selection
-var combinedCharacters = [];
-var finalPassword = [];
-
 //function to generate a password
 function generatePassword() {
+  //Created empty array to store all characters for password selection
+  var combinedCharacters = [];
+  var finalPassword = [];
   //Prompt to get the length for the password, if not in range tell user and show prompt again
   passLength = parseInt(prompt("Enter length of password"));
 
   // If statment to check length
-  if (passLength <= 8 && passLength >= 128) {
+  if (passLength <= 8 || passLength >= 128) {
     alert("Password must be atleast 8 characters and no more than 128");
     passLength = prompt("Enter length of password");
   }
@@ -139,13 +138,13 @@ function generatePassword() {
   }
 
   for (let i = 0; i < passLength; i++) {
-    var randomChar = combinedCharacters[Math.floor(Math.random() * combinedCharacters.length)];
+    var randomChar =
+      combinedCharacters[Math.floor(Math.random() * combinedCharacters.length)];
     finalPassword.push(randomChar);
   }
   return finalPassword.join("");
   //try writepassword with finalpassword
 }
-
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
@@ -156,7 +155,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-  
 }
 
 // Add event listener to generate button
